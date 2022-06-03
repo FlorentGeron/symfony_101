@@ -23,6 +23,10 @@ class Message
     #[ORM\JoinColumn(nullable: false)]
     private $Channel_id;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'messages')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $User_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +64,18 @@ class Message
     public function setChannelId(?Channel $Channel_id): self
     {
         $this->Channel_id = $Channel_id;
+
+        return $this;
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->User_id;
+    }
+
+    public function setUserId(?User $User_id): self
+    {
+        $this->User_id = $User_id;
 
         return $this;
     }
