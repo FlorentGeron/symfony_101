@@ -21,9 +21,13 @@ class Channel
     #[ORM\OneToMany(mappedBy: 'Channel_id', targetEntity: Message::class, orphanRemoval: true)]
     private $messages;
 
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'channels')]
+    private $Invited;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
+        $this->Invited = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -69,6 +73,30 @@ class Channel
                 $message->setChannelId(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getInvited(): Collection
+    {
+        return $this->Invited;
+    }
+
+    public function addInvited(User $invited): self
+    {
+        if (!$this->Invited->contains($invited)) {
+            $this->Invited[] = $invited;
+        }
+
+        return $this;
+    }
+
+    public function removeInvited(User $invited): self
+    {
+        $this->Invited->removeElement($invited);
 
         return $this;
     }
