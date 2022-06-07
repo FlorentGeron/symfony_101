@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Channel{% endblock %}
+
+{% block body %}
+    <h1>Channel</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ channel.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ channel.Title }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_channel_index') }}">back to list</a>
+
+    <a href="{{ path('app_channel_edit', {'id': channel.id}) }}">edit</a>
+
+    {{ include('channel/_delete_form.html.twig') }}
+{% endblock %}
