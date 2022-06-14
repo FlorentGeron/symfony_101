@@ -108,6 +108,11 @@ class User
         return $this;
     }
 
+    public function __toString()
+    {
+      return $this->Nickname;
+    }
+
     /**
      * @return Collection<int, Channel>
      */
