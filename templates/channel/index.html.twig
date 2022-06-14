@@ -8,18 +8,14 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Title</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for channel in channels %}
             <tr>
-                <td>{{ channel.id }}</td>
-                <td>{{ channel.Title }}</td>
                 <td>
-                    <a href="{{ path('app_channel_show', {'id': channel.id}) }}">show</a>
+                    <a href="{{ path('app_channel_show', {'id': channel.id}) }}">{{ channel.Title }}</a>
                 </td>
             </tr>
         {% else %}
