@@ -7,7 +7,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Author</th>
                 <th>Content</th>
                 <th>Created_at</th>
                 <th>actions</th>
@@ -16,7 +16,7 @@
         <tbody>
         {% for message in messages %}
             <tr>
-                <td>{{ message.id }}</td>
+                <td>{{ message.UserId }}</td>
                 <td>{{ message.Content }}</td>
                 <td>{{ message.CreatedAt ? message.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
