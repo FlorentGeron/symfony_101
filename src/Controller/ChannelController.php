@@ -45,6 +45,7 @@ class ChannelController extends AbstractController
     {
         return $this->render('channel/show.html.twig', [
             'channel' => $channel,
+            'messages' => $channel->getMessages(),
         ]);
     }
 
