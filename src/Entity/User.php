@@ -110,7 +110,7 @@ class User
 
     public function __toString()
     {
-      return $this->Nickname;
+      return $this->nickname;
     }
 
     /**
