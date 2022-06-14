@@ -10,7 +10,6 @@
                 <th>Author</th>
                 <th>Content</th>
                 <th>Created_at</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
@@ -18,11 +17,7 @@
             <tr>
                 <td>{{ message.UserId }}</td>
                 <td>{{ message.Content }}</td>
-                <td>{{ message.CreatedAt ? message.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_message_show', {'id': message.id}) }}">show</a>
-                    <a href="{{ path('app_message_edit', {'id': message.id}) }}">edit</a>
-                </td>
+                <td>{{ message.CreatedAt ? message.CreatedAt|date('Y-m-d H:i') : '' }}</td>
             </tr>
         {% else %}
             <tr>
