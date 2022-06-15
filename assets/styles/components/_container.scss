@@ -1,4 +1,19 @@
 .container {
   display:flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.sideblock{
+  flex-shrink: 1;
+  width: 20%;
+  height: 100%;
+  background-color: $primary;
+  color: $secondary;
+}
+
+.central-block {
+  flex-grow: 1;
+  height: 100%;
+  text-align: center;
 }
