@@ -9,7 +9,7 @@
         <ul>
           {% for channel in channels %}
             <li>
-              <a href="{{ path('app_channel_show', {'id': channel.id}) }}">{{ channel.Title }}</a>
+              <a href="{{ path('app_channel_show', {'id': channel.id}) }}">#{{ channel.Title }}</a>
             </li>
           {% else %}
               <li>no records found</li>
@@ -18,7 +18,7 @@
         <a href="{{ path('app_channel_new') }}">Create new</a>
       </div>
       <div class="central-block">
-        <h1>{{ channel.Title }}</h1>
+        <h1>#{{ channel.Title }}</h1>
           <ul>
             {% for message in messages %}
                 <li>
