@@ -15,7 +15,9 @@
               <li>no records found</li>
           {% endfor %}
         </ul>
-        <a href="{{ path('app_channel_new') }}">Create new</a>
+        <a href="{{ path('app_channel_new') }}">
+          <div class= "bacchus-button"> Create new </div>
+        </a>
       </div>
       <div class="central-block">
         <h1>#{{ channel.Title }}</h1>
@@ -36,8 +38,9 @@
             {% endfor %}
           </ul>
 
-        <a href="{{ path('app_channel_index') }}">back to list</a>
-        <a href="{{ path('app_message_new') }}">Add a message</a>
+        <a href="{{ path('app_message_new') }}">
+        <div class="bacchus-button"> Write something </div>
+        </a>
       </div>
       <div class="sideblock left-shadow">
       <h1>Look who's here!</h1>
