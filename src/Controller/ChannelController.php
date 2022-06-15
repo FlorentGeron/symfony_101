@@ -7,6 +7,7 @@ use App\Form\ChannelType;
 use App\Repository\ChannelRepository;
 use App\Repository\UserRepository;
 use App\Entity\Message;
+use App\Form\MessageType;
 use App\Repository\MessageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,7 +57,7 @@ class ChannelController extends AbstractController
           return $this->redirectToRoute('app_message_index', [], Response::HTTP_SEE_OTHER);
       }
 
-        return $this->render('channel/show.html.twig', [
+        return $this->renderForm('channel/show.html.twig', [
             'channel' => $channel,
             'messages' => $channel->getMessages(),
             'channels' => $channelRepository->findAll(),
