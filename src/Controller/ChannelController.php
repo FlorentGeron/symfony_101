@@ -6,6 +6,8 @@ use App\Entity\Channel;
 use App\Form\ChannelType;
 use App\Repository\ChannelRepository;
 use App\Repository\UserRepository;
+use App\Entity\Message;
+use App\Repository\MessageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -61,5 +63,25 @@ class ChannelController extends AbstractController
         }
 
         return $this->redirectToRoute('app_channel_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/new_message', name: 'app_channel_add_message',methods: ['GET', 'POST'])]
+    public function add_message (Request $request, MessageRepository $messageRepository, Channel $channel) : Response
+    {
+      $message = new Message();
+        $form = $this->createForm(MessageType::class, $message);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $messageRepository->add($message, true);
+
+            return $this->redirectToRoute('app_message_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('message/new.html.twig', [
+            'message' => $message,
+            'form' => $form,
+            'channel' => $channel
+        ]);
     }
 }
