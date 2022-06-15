@@ -43,14 +43,25 @@ class ChannelController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_channel_show', methods: ['GET'])]
-    public function show(Channel $channel, ChannelRepository $channelRepository, UserRepository $userRepository): Response
+    #[Route('/{id}', name: 'app_channel_show', methods: ['GET', 'POST'])]
+    public function show(Request $request, MessageRepository $messageRepository, Channel $channel, ChannelRepository $channelRepository, UserRepository $userRepository): Response
     {
+        $message = new Message();
+        $form = $this->createForm(MessageType::class, $message);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+          $messageRepository->add($message, true);
+
+          return $this->redirectToRoute('app_message_index', [], Response::HTTP_SEE_OTHER);
+      }
+
         return $this->render('channel/show.html.twig', [
             'channel' => $channel,
             'messages' => $channel->getMessages(),
             'channels' => $channelRepository->findAll(),
             'users' => $userRepository->findAll(),
+            'form' => $form
         ]);
     }
 
