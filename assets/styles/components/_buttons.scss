@@ -3,8 +3,21 @@
   background-color: $primary;
   color: $background;
   padding: 4px 8px;
+  max-width: 60%;
   text-align:center;
-  box-shadow: 0px 2px 2px 0px rgba(0,0,0, 0.2);
+  box-shadow: 0px 2px 2px 0px $primary-shadow;
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+.bacchus-button-inverted {
+  border-radius: 4px;
+  background-color: $background;
+  color: $primary;
+  padding: 4px 8px;
+  max-width: 60%;
+  text-align:center;
+  box-shadow: 0px 2px 2px 0px $background-shadow;
   font-weight: bold;
   font-size: 0.8em;
 }
