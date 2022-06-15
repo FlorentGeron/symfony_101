@@ -31,3 +31,11 @@
   background-color: $background;
   z-index: 1;
 }
+
+.lonely-block {
+  height: 100%;
+  text-align: left;
+  margin: 0 auto;
+  background-color: $background;
+  max-width: 80%;
+}
