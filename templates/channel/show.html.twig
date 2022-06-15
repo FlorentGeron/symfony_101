@@ -3,24 +3,31 @@
 {% block title %}Channel{% endblock %}
 
 {% block body %}
-    <h1>{{ channel.Title }}</h1>
-      <ul>
-        {% for message in messages %}
-            <li>
-              <div class= "msg-box">
-                <div class="msg-title">
-                  {{ message.UserId }} {{ message.CreatedAt ? message.CreatedAt|date('Y-m-d H:i') : '' }}
-                </div>
-                <div class= "msg-content">
-                  {{ message.Content }}
-                </div>
-              </div>
-            </li>
-        {% else %}
-            <li> no records found </li>
-        {% endfor %}
-      </ul>
+    <div class="container">
+      <div class="left-block">
+      
+      </div>
+      <div class="central-block">
+        <h1>{{ channel.Title }}</h1>
+          <ul>
+            {% for message in messages %}
+                <li>
+                  <div class= "msg-box">
+                    <div class="msg-title">
+                      {{ message.UserId }} {{ message.CreatedAt ? message.CreatedAt|date('Y-m-d H:i') : '' }}
+                    </div>
+                    <div class= "msg-content">
+                      {{ message.Content }}
+                    </div>
+                  </div>
+                </li>
+            {% else %}
+                <li> no records found </li>
+            {% endfor %}
+          </ul>
 
-    <a href="{{ path('app_channel_index') }}">back to list</a>
-    <a href="{{ path('app_message_new') }}">Add a message</a>
+        <a href="{{ path('app_channel_index') }}">back to list</a>
+        <a href="{{ path('app_message_new') }}">Add a message</a>
+      </div>
+    </div>
 {% endblock %}
