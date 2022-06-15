@@ -4,28 +4,22 @@
 
 {% block body %}
     <h1>{{ channel.Title }}</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Author</th>
-                <th>Content</th>
-                <th>Created_at</th>
-            </tr>
-        </thead>
-        <tbody>
+      <ul>
         {% for message in messages %}
-            <tr>
-                <td>{{ message.UserId }}</td>
-                <td>{{ message.Content }}</td>
-                <td>{{ message.CreatedAt ? message.CreatedAt|date('Y-m-d H:i') : '' }}</td>
-            </tr>
+            <li>
+              <div class= "msg-box">
+                <div class="msg-title">
+                  {{ message.UserId }} {{ message.CreatedAt ? message.CreatedAt|date('Y-m-d H:i') : '' }}
+                </div>
+                <div class= "msg-content">
+                  {{ message.Content }}
+                </div>
+              </div>
+            </li>
         {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
+            <li> no records found </li>
         {% endfor %}
-        </tbody>
-    </table>
+      </ul>
 
     <a href="{{ path('app_channel_index') }}">back to list</a>
     <a href="{{ path('app_message_new') }}">Add a message</a>
