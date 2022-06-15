@@ -4,21 +4,24 @@
 
 {% block body %}
     <div class="container">
-      <div class="left-block">
+      <div class="sideblock right-shadow">
         <h1>Channel index</h1>
         <ul>
           {% for channel in channels %}
             <li>
-              <a href="{{ path('app_channel_show', {'id': channel.id}) }}">{{ channel.Title }}</a>
+              <a href="{{ path('app_channel_show', {'id': channel.id}) }}">#{{ channel.Title }}</a>
             </li>
           {% else %}
               <li>no records found</li>
           {% endfor %}
         </ul>
-        <a href="{{ path('app_channel_new') }}">Create new</a>
+        <a href="{{ path('app_channel_new') }}">
+          <div class= "bacchus-button-inverted"> Create new </div>
+        </a>
       </div>
       <div class="central-block">
-        <h1>{{ channel.Title }}</h1>
+        <h1>#{{ channel.Title }}</h1>
+        <div class="msg-container">
           <ul>
             {% for message in messages %}
                 <li>
@@ -35,9 +38,23 @@
                 <li> no records found </li>
             {% endfor %}
           </ul>
-
-        <a href="{{ path('app_channel_index') }}">back to list</a>
-        <a href="{{ path('app_message_new') }}">Add a message</a>
+        </div>
+        <div class="new-msg-form">
+          <div class="input field"> Something There </div>
+          <a href="{{ path('app_message_new') }}">
+            <div class="bacchus-button"> Send </div>
+          </a>
+        </div>
       </div>
+      <div class="sideblock left-shadow">
+      <h1>Look who's here!</h1>
+        <ul>
+          {% for user in users %}
+            <a href="{{ path('app_message_new') }}"> {{user.nickname}}</a>
+          {% else %}
+            <li>No records found</li>
+          {% endfor %}
+        </ul>
     </div>
+  </div>
 {% endblock %}

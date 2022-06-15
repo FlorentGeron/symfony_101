@@ -1,0 +1,41 @@
+.container {
+  display:flex;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.sideblock{
+  padding: 16px;
+  text-align: center;
+  flex-shrink: 1;
+  width: 20%;
+  height: 100%;
+  background-color: $primary;
+  color: $background;
+  z-index: 2;
+  border-radius: 4px;
+}
+
+.left-shadow {
+  box-shadow: -2px 0px 2px 1px rgba(88,133,105, 0.2);
+}
+
+.right-shadow {
+  box-shadow: 2px 0px 2px 1px rgba(88,133,105, 0.2);
+}
+
+.central-block {
+  flex-grow: 1;
+  height: 100%;
+  text-align: center;
+  background-color: $background;
+  z-index: 1;
+}
+
+.lonely-block {
+  height: 100%;
+  text-align: left;
+  margin: 0 auto;
+  background-color: $background;
+  max-width: 80%;
+}
