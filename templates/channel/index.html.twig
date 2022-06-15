@@ -4,27 +4,14 @@
 
 {% block body %}
     <h1>Channel index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Title</th>
-            </tr>
-        </thead>
-        <tbody>
+      <ul>
         {% for channel in channels %}
-            <tr>
-                <td>
-                    <a href="{{ path('app_channel_show', {'id': channel.id}) }}">{{ channel.Title }}</a>
-                </td>
-            </tr>
+          <li>
+            <a href="{{ path('app_channel_show', {'id': channel.id}) }}">{{ channel.Title }}</a>
+          </li>
         {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
+            <li>no records found</li>
         {% endfor %}
-        </tbody>
-    </table>
-
+      </ul>
     <a href="{{ path('app_channel_new') }}">Create new</a>
 {% endblock %}

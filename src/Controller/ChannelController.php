@@ -41,11 +41,12 @@ class ChannelController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_channel_show', methods: ['GET'])]
-    public function show(Channel $channel): Response
+    public function show(Channel $channel, ChannelRepository $channelRepository): Response
     {
         return $this->render('channel/show.html.twig', [
             'channel' => $channel,
             'messages' => $channel->getMessages(),
+            'channels' => $channelRepository->findAll(),
         ]);
     }
 
