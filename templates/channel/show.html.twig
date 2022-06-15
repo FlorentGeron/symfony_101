@@ -21,6 +21,7 @@
       </div>
       <div class="central-block">
         <h1>#{{ channel.Title }}</h1>
+        <div class="msg-container">
           <ul>
             {% for message in messages %}
                 <li>
@@ -37,10 +38,13 @@
                 <li> no records found </li>
             {% endfor %}
           </ul>
-
-        <a href="{{ path('app_message_new') }}">
-        <div class="bacchus-button"> Write something </div>
-        </a>
+        </div>
+        <div class="new-msg-form">
+          <div class="input field"> Something There </div>
+          <a href="{{ path('app_message_new') }}">
+            <div class="bacchus-button"> Send </div>
+          </a>
+        </div>
       </div>
       <div class="sideblock left-shadow">
       <h1>Look who's here!</h1>
@@ -52,5 +56,5 @@
           {% endfor %}
         </ul>
     </div>
-    </div>
+  </div>
 {% endblock %}
