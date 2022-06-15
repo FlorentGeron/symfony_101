@@ -40,4 +40,14 @@
         <a href="{{ path('app_message_new') }}">Add a message</a>
       </div>
     </div>
+    <div class="right-block">
+      <h1>Look who's here!</h1>
+        <ul>
+          {% for user in users %}
+            <a href="{{ path('app_message_new') }}"> {{user.nickname}}</a>
+          {% else %}
+            <li>No records found</li>
+          {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
