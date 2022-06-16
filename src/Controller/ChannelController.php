@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/channel')]
 class ChannelController extends AbstractController
 {
-    #[Route('/', name: 'app_channel_index', methods: ['GET'])]
+    #[Route('/index', name: 'app_channel_index', methods: ['GET'])]
     public function index(ChannelRepository $channelRepository): Response
     {
         return $this->render('channel/index.html.twig', [
@@ -49,9 +49,11 @@ class ChannelController extends AbstractController
     public function newpm(ChannelRepository $channelRepository, int $user_id, UserRepository $userRepository): Response
     {
         $channel = new Channel();
-        $channel->addUser($this->getUser());
-        $channel->addUser($userRepository->find($user_id));
-        $channel->setTitle('Private Message with');
+        $invitee = $userRepository->find($user_id);
+        $user = $this->getUser();
+        $channel->addUser($user);
+        $channel->addUser($invitee);
+        $channel->setTitle("PM {$user} - {$invitee}");
         $channelRepository->add($channel, true);
 
         return $this->redirectToRoute('app_channel_show', ['id' => $channel->getId()], Response::HTTP_SEE_OTHER);
