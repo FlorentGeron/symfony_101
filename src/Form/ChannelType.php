@@ -13,7 +13,7 @@ class ChannelType extends AbstractType
     {
         $builder
             ->add('Title')
-            ->add('Invited')
+            ->add('users')
         ;
     }
 
