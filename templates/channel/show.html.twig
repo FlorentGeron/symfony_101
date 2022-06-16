@@ -25,9 +25,13 @@
         <ul>
           {% for message in messages %}
               <li>
-                <div class= "msg-box">
+                {% if message.Owner is same as(client) %}
+                  <div class= "msg-box-user">
+                {% else %}
+                  <div class= "msg-box">
+                {% endif %}
                   <div class="msg-title">
-                    {{ message.UserId }} {{ message.CreatedAt ? message.CreatedAt|date('Y-m-d H:i') : '' }}
+                    {{ message.Owner }} {{ message.CreatedAt ? message.CreatedAt|date('Y-m-d H:i') : '' }}
                   </div>
                   <div class= "msg-content">
                     {{ message.Content }}
@@ -44,12 +48,22 @@
       </div>
     </div>
     <div class="sideblock left-shadow">
-    <h1>Look who's here!</h1>
+      <h1>Look who's here!</h1>
       <ul>
         {% for user in users %}
-          <a href="{{ path('app_channel_new') }}"> {{user.nickname}}</a>
+          <li>
+            <a href="{{ path('app_channel_newpm', {'user_id': user.id})}}"> {{user.nickname}}</a>
+          </li>
         {% else %}
           <li>No records found</li>
+        {% endfor %}
+      </ul>
+      <h1> Invited in this channel: </h1>
+      <ul>
+        {% for user in channel.users %}
+        <li>
+            <a href="{{ path('app_channel_newpm', {'user_id': user.id})}}"> {{user.nickname}}</a>
+        </li>
         {% endfor %}
       </ul>
     </div>

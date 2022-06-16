@@ -8,6 +8,17 @@
     border-radius: 4px;
   }
 
+.msg-box-user {
+  align-self:flex-end;
+  padding: 8px;
+    margin-top: 8px;
+    text-align: left;
+    width: 70%;
+    background-color: $primary-transparent;
+    color: black;
+    border-radius: 4px;
+}
+
 .msg-title {
   font-weight: bold;
 }

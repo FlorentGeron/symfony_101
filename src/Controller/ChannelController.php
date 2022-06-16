@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Channel;
 use App\Form\ChannelType;
 use App\Repository\ChannelRepository;
+use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Entity\Message;
 use App\Form\MessageType;
@@ -17,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/channel')]
 class ChannelController extends AbstractController
 {
-    #[Route('/', name: 'app_channel_index', methods: ['GET'])]
+    #[Route('/index', name: 'app_channel_index', methods: ['GET'])]
     public function index(ChannelRepository $channelRepository): Response
     {
         return $this->render('channel/index.html.twig', [
@@ -44,17 +45,36 @@ class ChannelController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_channel_show', methods: ['GET', 'POST'])]
+    #[Route('/newpm/{user_id}', name: 'app_channel_newpm', methods: ['GET', 'POST'])]
+    public function newpm(ChannelRepository $channelRepository, int $user_id, UserRepository $userRepository): Response
+    {
+        $channel = new Channel();
+        $invitee = $userRepository->find($user_id);
+        $user = $this->getUser();
+        $channel->addUser($user);
+        $channel->addUser($invitee);
+        $channel->setTitle("PM {$user} - {$invitee}");
+        $channelRepository->add($channel, true);
+
+        return $this->redirectToRoute('app_channel_show', ['id' => $channel->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+
+    #[Route('/{id?1}', name: 'app_channel_show', methods: ['GET', 'POST'])]
     public function show(Request $request, MessageRepository $messageRepository, Channel $channel, ChannelRepository $channelRepository, UserRepository $userRepository): Response
     {
+        $user = $this->getUser();
         $message = new Message();
+        $message->setCreatedAt(new \DateTime('now'));
+        $message->setChannelId($channel);
+        $message->setOwner($user);
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
           $messageRepository->add($message, true);
 
-          return $this->redirectToRoute('app_message_index', [], Response::HTTP_SEE_OTHER);
+          return $this->redirectToRoute('app_channel_show', ['id' => $channel->getId()], Response::HTTP_SEE_OTHER);
       }
 
         return $this->renderForm('channel/show.html.twig', [
@@ -62,7 +82,8 @@ class ChannelController extends AbstractController
             'messages' => $channel->getMessages(),
             'channels' => $channelRepository->findAll(),
             'users' => $userRepository->findAll(),
-            'form' => $form
+            'form' => $form,
+            'client' => $user
         ]);
     }
 
@@ -77,23 +98,4 @@ class ChannelController extends AbstractController
         return $this->redirectToRoute('app_channel_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/new_message', name: 'app_channel_add_message',methods: ['GET', 'POST'])]
-    public function add_message (Request $request, MessageRepository $messageRepository, Channel $channel) : Response
-    {
-      $message = new Message();
-        $form = $this->createForm(MessageType::class, $message);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $messageRepository->add($message, true);
-
-            return $this->redirectToRoute('app_message_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('message/new.html.twig', [
-            'message' => $message,
-            'form' => $form,
-            'channel' => $channel
-        ]);
-    }
 }

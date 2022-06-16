@@ -13,10 +13,7 @@ class MessageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Content')
-            ->add('Created_at', HiddenType::class)
-            ->add('Channel_id', HiddenType::class)
-            ->add('User_id', HiddenType::class);
+            ->add('Content');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
