@@ -63,10 +63,11 @@ class ChannelController extends AbstractController
     #[Route('/{id?1}', name: 'app_channel_show', methods: ['GET', 'POST'])]
     public function show(Request $request, MessageRepository $messageRepository, Channel $channel, ChannelRepository $channelRepository, UserRepository $userRepository): Response
     {
+        $user = $this->getUser();
         $message = new Message();
         $message->setCreatedAt(new \DateTime('now'));
         $message->setChannelId($channel);
-        $message->setOwner($this->getUser());
+        $message->setOwner($user);
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
 
@@ -81,7 +82,8 @@ class ChannelController extends AbstractController
             'messages' => $channel->getMessages(),
             'channels' => $channelRepository->findAll(),
             'users' => $userRepository->findAll(),
-            'form' => $form
+            'form' => $form,
+            'client' => $user
         ]);
     }
 
