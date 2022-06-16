@@ -44,12 +44,25 @@ class ChannelController extends AbstractController
         ]);
     }
 
+    #[Route('/newpm/{user_id}', name: 'app_channel_newpm', methods: ['GET', 'POST'])]
+    public function newpm(ChannelRepository $channelRepository): Response
+    {
+        $channel = new Channel();
+        $channel->addUser($this->getUser());
+        $channel->setTitle('Private Message');
+        $channelRepository->add($channel, true);
+
+        return $this->redirectToRoute('app_channel_show', ['id' => $channel->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+
     #[Route('/{id}', name: 'app_channel_show', methods: ['GET', 'POST'])]
     public function show(Request $request, MessageRepository $messageRepository, Channel $channel, ChannelRepository $channelRepository, UserRepository $userRepository): Response
     {
         $message = new Message();
         $message->setCreatedAt(new \DateTime('now'));
         $message->setChannelId($channel);
+        $message->setOwner($this->getUser());
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
 

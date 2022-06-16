@@ -13,8 +13,7 @@ class MessageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Content')
-            ->add('Owner');
+            ->add('Content');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
