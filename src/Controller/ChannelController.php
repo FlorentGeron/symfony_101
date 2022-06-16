@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Channel;
 use App\Form\ChannelType;
 use App\Repository\ChannelRepository;
+use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Entity\Message;
 use App\Form\MessageType;
@@ -45,11 +46,12 @@ class ChannelController extends AbstractController
     }
 
     #[Route('/newpm/{user_id}', name: 'app_channel_newpm', methods: ['GET', 'POST'])]
-    public function newpm(ChannelRepository $channelRepository): Response
+    public function newpm(ChannelRepository $channelRepository, int $user_id, UserRepository $userRepository): Response
     {
         $channel = new Channel();
         $channel->addUser($this->getUser());
-        $channel->setTitle('Private Message');
+        $channel->addUser($userRepository->find($user_id));
+        $channel->setTitle('Private Message with');
         $channelRepository->add($channel, true);
 
         return $this->redirectToRoute('app_channel_show', ['id' => $channel->getId()], Response::HTTP_SEE_OTHER);
@@ -92,23 +94,4 @@ class ChannelController extends AbstractController
         return $this->redirectToRoute('app_channel_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/new_message', name: 'app_channel_add_message',methods: ['GET', 'POST'])]
-    public function add_message (Request $request, MessageRepository $messageRepository, Channel $channel) : Response
-    {
-      $message = new Message();
-        $form = $this->createForm(MessageType::class, $message);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $messageRepository->add($message, true);
-
-            return $this->redirectToRoute('app_message_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('message/new.html.twig', [
-            'message' => $message,
-            'form' => $form,
-            'channel' => $channel
-        ]);
-    }
 }
