@@ -48,13 +48,15 @@ class ChannelController extends AbstractController
     public function show(Request $request, MessageRepository $messageRepository, Channel $channel, ChannelRepository $channelRepository, UserRepository $userRepository): Response
     {
         $message = new Message();
+        $message->setCreatedAt(new \DateTime('now'));
+        $message->setChannelId($channel);
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
           $messageRepository->add($message, true);
 
-          return $this->redirectToRoute('app_message_index', [], Response::HTTP_SEE_OTHER);
+          return $this->redirectToRoute('app_channel_show', ['id' => $channel->getId()], Response::HTTP_SEE_OTHER);
       }
 
         return $this->renderForm('channel/show.html.twig', [
