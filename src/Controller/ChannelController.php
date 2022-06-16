@@ -56,7 +56,7 @@ class ChannelController extends AbstractController
     }
 
 
-    #[Route('/{id}', name: 'app_channel_show', methods: ['GET', 'POST'])]
+    #[Route('/{id?1}', name: 'app_channel_show', methods: ['GET', 'POST'])]
     public function show(Request $request, MessageRepository $messageRepository, Channel $channel, ChannelRepository $channelRepository, UserRepository $userRepository): Response
     {
         $message = new Message();
