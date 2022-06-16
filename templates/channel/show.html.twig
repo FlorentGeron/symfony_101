@@ -27,7 +27,7 @@
               <li>
                 <div class= "msg-box">
                   <div class="msg-title">
-                    {{ message.UserId }} {{ message.CreatedAt ? message.CreatedAt|date('Y-m-d H:i') : '' }}
+                    {{ message.Owner }} {{ message.CreatedAt ? message.CreatedAt|date('Y-m-d H:i') : '' }}
                   </div>
                   <div class= "msg-content">
                     {{ message.Content }}
