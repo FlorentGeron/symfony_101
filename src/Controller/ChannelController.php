@@ -80,7 +80,7 @@ class ChannelController extends AbstractController
         return $this->renderForm('channel/show.html.twig', [
             'channel' => $channel,
             'messages' => $channel->getMessages(),
-            'channels' => $channelRepository->findAll(),
+            'channels' => $channelRepository->findbyUser($user),
             'users' => $userRepository->findAll(),
             'form' => $form,
             'client' => $user
