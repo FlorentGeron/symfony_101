@@ -81,9 +81,9 @@ class ChannelController extends AbstractController
             'channel' => $channel,
             'messages' => $channel->getMessages(),
             'channels' => $channelRepository->findbyUser($user),
-            'users' => $userRepository->findAll(),
+            'users' => $userRepository->findAllExcept($user),
             'form' => $form,
-            'client' => $user
+            'client' => $user,
         ]);
     }
 
