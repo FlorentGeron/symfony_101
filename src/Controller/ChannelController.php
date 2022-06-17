@@ -98,4 +98,21 @@ class ChannelController extends AbstractController
         return $this->redirectToRoute('app_channel_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    #[Route('/{id}/edit', name: 'app_channel_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Channel $channel, ChannelRepository $channelRepository): Response
+    {
+        $form = $this->createForm(ChannelType::class, $channel);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $channelRepository->add($channel, true);
+
+            return $this->redirectToRoute('app_channel_show', ['id' => $channel->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('channel/edit.html.twig', [
+            'channel' => $channel,
+            'form' => $form,
+        ]);
+    }
 }
