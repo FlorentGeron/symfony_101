@@ -1,4 +1,6 @@
 {{ form_start(form) }}
+  <div class="inline-form-msg">
     {{ form_widget(form) }}
     <button class="bacchus-button">{{ button_label|default('Send') }}</button>
+  </div>
 {{ form_end(form) }}
