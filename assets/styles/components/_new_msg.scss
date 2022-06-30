@@ -4,9 +4,14 @@
   display: flex;
   justify-content: space-between;
   padding: 8px;
+  width: 50%;
+form {
+  width:100%;
+}
 }
 
 .inline-form-msg {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
