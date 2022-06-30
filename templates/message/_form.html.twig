@@ -1,6 +1,6 @@
 {{ form_start(form) }}
   <div class="inline-form-msg">
-    {{ form_widget(form.Content) }}
+    {{ form_widget(form.Content, {'attr': {'class': 'message-field'}}) }}
     <button class="bacchus-button">{{ button_label|default('Send') }}</button>
   </div>
 {{ form_end(form) }}
