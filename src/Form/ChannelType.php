@@ -13,7 +13,9 @@ class ChannelType extends AbstractType
     {
         $builder
             ->add('Title')
-            ->add('users')
+            ->add('users', null, array(
+              'by_reference' => false,
+            ))
         ;
     }
 

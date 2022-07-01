@@ -34,7 +34,8 @@ class ChannelController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $channelRepository->add($channel, true);
+          //dd($form->getData());
+          $channelRepository->add($channel, true);
 
             return $this->redirectToRoute('app_channel_show', ['id' => $channel->getId()], Response::HTTP_SEE_OTHER);
         }
