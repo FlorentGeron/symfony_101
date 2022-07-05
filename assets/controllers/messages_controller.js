@@ -1,7 +1,8 @@
 import { Controller } from '@hotwired/stimulus';
+import { format } from 'core-js/library/core/date';
 
 export default class extends Controller {
-  static targets = ["messageField"]
+  static targets = ["messageField", "form"]
 
 
   connect() {
@@ -9,14 +10,8 @@ export default class extends Controller {
   }
 
   displaymessage(e) {
-    e.preventDefault()
-    const form = this.document.find('form');
-    const url = '${this.form.action}';
-    fetch(url, { headers: { 'Accept': 'text/plain' } })
-    .then(response => response.text())
-    .then((data)=> {
-      this.messageField.innerHTML = data;
-    })
-    console.log('Prout');
+    e.preventDefault();
+    const form = document.querySelector('form');
+    
   }
 }
