@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
-import { format } from 'core-js/library/core/date';
+
 
 export default class extends Controller {
   static targets = ["messageField", "form"]
@@ -12,6 +12,20 @@ export default class extends Controller {
   displaymessage(e) {
     e.preventDefault();
     const form = document.querySelector('form');
-    
+    const url = `${form.action}`;
+    const options = {
+      method: 'POST',
+      headers: { accept: 'text/plain'},
+      body: new FormData(form)
+    }
+
+    fetch(form.action, options)
+    .then(response => response.text())
+    .then((data)=> {
+      this.messageFieldTarget.insertAdjacentHTML('beforeend',data)
+    })
+    form.reset();
+    console.log('Prout');
+
   }
 }
