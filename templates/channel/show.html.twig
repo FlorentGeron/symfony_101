@@ -19,9 +19,9 @@
         <div class= "bacchus-button-inverted"> Create new </div>
       </a>
     </div>
-    <div class="central-block">
+    <div class="central-block" data-controller = "messages">
       <h1>#{{ channel.Title }}</h1>
-      <div class="msg-container">
+      <div class="msg-container" data-messages-target = "messageField">
         <ul>
           {% for message in messages %}
               <li>
