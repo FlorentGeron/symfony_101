@@ -75,7 +75,11 @@ class ChannelController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
           $messageRepository->add($message, true);
 
-          return $this->redirectToRoute('app_channel_show', ['id' => $channel->getId()], Response::HTTP_SEE_OTHER);
+          return $this->render('message/_newmsg.html.twig', [
+            'message' => $message,
+        ]);
+
+        // return $this->redirectToRoute('app_channel_show', ['id' => $channel->getId()], Response::HTTP_SEE_OTHER);
       }
 
         return $this->renderForm('channel/show.html.twig', [

@@ -1,0 +1,8 @@
+<div class= "msg-box-user">
+<div class="msg-title">
+  {{ message.Owner }} {{ message.CreatedAt ? message.CreatedAt|date('Y-m-d H:i') : '' }}
+</div>
+<div class= "msg-content">
+  {{ message.Content }}
+</div>
+</div>
