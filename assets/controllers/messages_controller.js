@@ -9,6 +9,6 @@ export default class extends Controller {
   }
 
   displaymessage() {
-    this.messageFieldTarget.append("<div>Prout</div>");
+    console.log('Prout');
   }
 }
