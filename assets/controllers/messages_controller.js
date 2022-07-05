@@ -8,7 +8,15 @@ export default class extends Controller {
       console.log( 'Hello Stimulus! Edit me in assets/controllers/hello_controller.js');
   }
 
-  displaymessage() {
+  displaymessage(e) {
+    e.preventDefault()
+    const form = this.document.find('form');
+    const url = '${this.form.action}';
+    fetch(url, { headers: { 'Accept': 'text/plain' } })
+    .then(response => response.text())
+    .then((data)=> {
+      this.messageField.innerHTML = data;
+    })
     console.log('Prout');
   }
 }
