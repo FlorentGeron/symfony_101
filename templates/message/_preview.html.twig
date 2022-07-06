@@ -1,12 +1,14 @@
-{% if message.Owner is same as client %}
-<div class= "msg-box-user">
-{% else %}
-<div class= "msg-box">
-{% endif %}
-<div class="msg-title">
-  {{ message.Owner }} {{ message.CreatedAt ? message.CreatedAt|date('Y-m-d H:i') : '' }}
-</div>
-<div class= "msg-content">
-  {{ message.Content }}
-</div>
-</div>
+<li>
+  {% if message.Owner is same as client %}
+  <div class= "msg-box-user">
+  {% else %}
+  <div class= "msg-box">
+  {% endif %}
+  <div class="msg-title">
+    {{ message.Owner }} {{ message.CreatedAt ? message.CreatedAt|date('Y-m-d H:i') : '' }}
+  </div>
+  <div class= "msg-content">
+    {{ message.Content }}
+  </div>
+  </div>
+</li>
