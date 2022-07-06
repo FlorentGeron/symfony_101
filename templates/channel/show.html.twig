@@ -22,26 +22,11 @@
     <div class="central-block" data-controller = "messages">
       <h1>#{{ channel.Title }}</h1>
       <div class="msg-container" data-messages-target = "messageField">
-        <ul>
           {% for message in messages %}
-              <li>
-                {% if message.Owner is same as(client) %}
-                  <div class= "msg-box-user">
-                {% else %}
-                  <div class= "msg-box">
-                {% endif %}
-                  <div class="msg-title">
-                    {{ message.Owner }} {{ message.CreatedAt ? message.CreatedAt|date('Y-m-d H:i') : '' }}
-                  </div>
-                  <div class= "msg-content">
-                    {{ message.Content }}
-                  </div>
-                </div>
-              </li>
+                {{include('message/_preview.html.twig')}}
           {% else %}
               <li> no records found </li>
           {% endfor %}
-        </ul>
       </div>
       <div class="new-msg-form">
         {{ include('message/_form.html.twig') }}
