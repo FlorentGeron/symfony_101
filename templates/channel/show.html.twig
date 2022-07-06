@@ -21,14 +21,12 @@
     </div>
     <div class="central-block" data-controller = "messages">
       <h1>#{{ channel.Title }}</h1>
-      <div class="msg-container">
-        <ul data-messages-target = "messageField">
+      <div class="msg-container" data-messages-target = "messageField">
           {% for message in messages %}
                 {{include('message/_preview.html.twig')}}
           {% else %}
               <li> no records found </li>
           {% endfor %}
-        </ul>
       </div>
       <div class="new-msg-form">
         {{ include('message/_form.html.twig') }}

@@ -12,7 +12,7 @@
   height: 100%;
   background-color: $primary;
   color: $background;
-  z-index: 2;
+  //z-index: 2;
   border-radius: 4px;
 }
 
@@ -25,6 +25,7 @@
 }
 
 .central-block {
+  padding: 8px;
   flex-grow: 1;
   height: 100%;
   text-align: center;
