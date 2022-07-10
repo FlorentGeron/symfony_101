@@ -25,3 +25,7 @@ services:
     App\Websocket\Rpc\MessageRpc:
         tags:
             - { name: gos_web_socket.rpc }
+
+     App\Websocket\Topic\MessageTopic:
+        tags:
+            - { name: gos_web_socket.topic }
