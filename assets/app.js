@@ -10,3 +10,7 @@ import './styles/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
+
+// Websocket Client-side JS
+import WS from '../vendor/gos/web-socket-bundle/public/js/websocket.min.js';
+
