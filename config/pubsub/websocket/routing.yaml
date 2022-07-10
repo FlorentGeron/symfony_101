@@ -8,3 +8,10 @@ message_rpc:
     # A list of requirements to match the URI pattern
     requirements:
         method: "[a-z_]+"
+
+message_topic:
+    # A unique URI pattern to identify this topic handler
+    pattern: message/channel
+
+    # Must match the `getName` method of your Topic class
+    callback: 'Message.topic'
