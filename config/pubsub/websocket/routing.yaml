@@ -1,0 +1,10 @@
+message_rpc:
+    # A unique URI pattern to identify this RPC handler
+    pattern: sample/{method}
+
+    # Must match the `getName` method of your RPC class
+    callback: 'Message.rpc'
+
+    # A list of requirements to match the URI pattern
+    requirements:
+        method: "[a-z_]+"
