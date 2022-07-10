@@ -6,12 +6,7 @@ export default class extends Controller {
 
 
   connect() {
-      console.log( 'Hello Stimulus! Now trying to initialize connection with websocket');
-      var webSocket = GosSocket.connect('ws://127.0.0.1:8080');
-      webSocket.on('socket/connect', function (session) {
-    //session is an AutobahnJS WAMP session.
-      console.log('Successfully connected to websocket!');
-});
+      console.log( 'Hello Stimulus!');
   }
 
   displaymessage(e) {
